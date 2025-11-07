@@ -1,7 +1,7 @@
 // main.dart
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
-import 'pages/login_page.dart';
+import 'package:trabalho_cuidador/core/app_theme.dart';
+import 'package:trabalho_cuidador/pages/login/view/login.view.dart';
 import 'services/auth_service.dart';
 
 void main() {
@@ -33,13 +33,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Appzão Flutter',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      title: 'CuidaDor',
+      theme: AppTheme.lightTheme,
+      debugShowCheckedModeBanner: false,
       home: isLoggedIn == null
           ? const Scaffold(body: Center(child: CircularProgressIndicator()))
           : isLoggedIn!
-          ? const HomePage()
-          : const LoginPage(),
+          ? const LoginView()
+          : const LoginView(),
     );
   }
 }
