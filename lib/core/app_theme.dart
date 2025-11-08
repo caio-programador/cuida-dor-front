@@ -8,6 +8,7 @@ class AppTheme {
   static const Color background = Color.fromARGB(255, 255, 255, 255);
   static const Color textDark = Color.fromARGB(255, 0, 0, 0);
   static const Color redDanger = Color.fromARGB(255, 255, 56, 60);
+  static const Color backgroundLight = Color.fromARGB(255, 238, 238, 238);
 
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
