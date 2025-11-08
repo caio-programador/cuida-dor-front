@@ -1,5 +1,10 @@
 // pages/login/controller/login.controller.dart
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+import 'package:trabalho_cuidador/pages/home/view/home.view.dart';
+import 'package:trabalho_cuidador/services/auth_service.dart';
+=======
+>>>>>>> 42d8687b4aea6a1bf77ab3eecc302b4e64ce797c
 
 class LoginController extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
@@ -21,6 +26,17 @@ class LoginController extends ChangeNotifier {
     if (value == null || value.isEmpty) {
       return 'Por favor, insira seu email';
     }
+<<<<<<< HEAD
+
+    final emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+
+    if (!emailRegex.hasMatch(value)) {
+      return 'Por favor, insira um email válido';
+    }
+
+=======
     
     final emailRegex = RegExp(
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -30,6 +46,7 @@ class LoginController extends ChangeNotifier {
       return 'Por favor, insira um email válido';
     }
     
+>>>>>>> 42d8687b4aea6a1bf77ab3eecc302b4e64ce797c
     return null;
   }
 
@@ -37,11 +54,11 @@ class LoginController extends ChangeNotifier {
     if (value == null || value.isEmpty) {
       return 'Por favor, insira sua senha';
     }
-    
+
     if (value.length < 6) {
       return 'A senha deve ter pelo menos 6 caracteres';
     }
-    
+
     return null;
   }
 
@@ -56,12 +73,30 @@ class LoginController extends ChangeNotifier {
     try {
       // Simula chamada ao backend
       await Future.delayed(const Duration(seconds: 2));
+<<<<<<< HEAD
+
+      await AuthService.login(emailController.text, passwordController.text);
+      Navigator.pushReplacement(
+        formKey.currentContext!,
+        MaterialPageRoute(builder: (_) => const HomeView()),
+      );
+
+=======
       
+>>>>>>> 42d8687b4aea6a1bf77ab3eecc302b4e64ce797c
       // Aqui você fará a chamada real ao AuthService
       // final success = await AuthService.login(
       //   emailController.text,
       //   passwordController.text,
       // );
+<<<<<<< HEAD
+
+      print('Email: ${emailController.text}');
+      print('Password: ${passwordController.text}');
+
+      // Simula sucesso
+      // if (success) { ... }
+=======
       
       print('Email: ${emailController.text}');
       print('Password: ${passwordController.text}');
@@ -69,6 +104,7 @@ class LoginController extends ChangeNotifier {
       // Simula sucesso
       // if (success) { ... }
       
+>>>>>>> 42d8687b4aea6a1bf77ab3eecc302b4e64ce797c
     } catch (e) {
       print('Erro ao fazer login: $e');
     } finally {

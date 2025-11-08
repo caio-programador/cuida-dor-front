@@ -1,6 +1,10 @@
 // main.dart
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
+<<<<<<< HEAD
+import 'package:trabalho_cuidador/pages/home/view/home.view.dart';
+=======
+>>>>>>> 42d8687b4aea6a1bf77ab3eecc302b4e64ce797c
 import 'package:trabalho_cuidador/pages/login/view/login.view.dart';
 import 'services/auth_service.dart';
 
@@ -39,7 +43,7 @@ class _MyAppState extends State<MyApp> {
       home: isLoggedIn == null
           ? const Scaffold(body: Center(child: CircularProgressIndicator()))
           : isLoggedIn!
-          ? const LoginView()
+          ? const HomeView()
           : const LoginView(),
     );
   }

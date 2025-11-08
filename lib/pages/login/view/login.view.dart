@@ -1,4 +1,3 @@
-// pages/login/view/login.view.dart
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/components/terms.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
