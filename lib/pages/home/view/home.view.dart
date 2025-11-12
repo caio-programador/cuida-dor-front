@@ -7,6 +7,7 @@ import '../components/pain_chart.dart';
 import '../components/empty_pain_card.dart';
 import '../components/info_card.dart';
 import '../components/action_button.dart';
+import 'package:trabalho_cuidador/utils/genericError.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -53,6 +54,12 @@ class _HomeViewState extends State<HomeView> {
             onPressed: () {
               // Navegar para perfil
               print('Perfil');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ErroGenericoPage(),
+                ),
+              );
             },
           ),
         ],
