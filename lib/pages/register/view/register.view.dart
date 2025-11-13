@@ -148,7 +148,7 @@ class _RegisterViewState extends State<RegisterView> {
               animation: _controller,
               builder: (context, _) {
                 return RegisterButton(
-                  onPressed: _controller.register,
+                  onPressed: () async => await _controller.register(),
                   isLoading: _controller.isLoading,
                 );
               },

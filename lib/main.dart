@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
 import 'package:trabalho_cuidador/pages/home/view/home.view.dart';
 import 'package:trabalho_cuidador/pages/login/view/login.view.dart';
@@ -22,6 +23,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     checkLogin();
+    dotenv.load(fileName: ".env");
   }
 
   Future<void> checkLogin() async {

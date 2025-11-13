@@ -56,26 +56,11 @@ class LoginController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Simula chamada ao backend
-      await Future.delayed(const Duration(seconds: 2));
-
       await AuthService.login(emailController.text, passwordController.text);
       Navigator.pushReplacement(
         formKey.currentContext!,
         MaterialPageRoute(builder: (_) => const HomeView()),
       );
-
-      // Aqui você fará a chamada real ao AuthService
-      // final success = await AuthService.login(
-      //   emailController.text,
-      //   passwordController.text,
-      // );
-
-      print('Email: ${emailController.text}');
-      print('Password: ${passwordController.text}');
-
-      // Simula sucesso
-      // if (success) { ... }
     } catch (e) {
       print('Erro ao fazer login: $e');
     } finally {
