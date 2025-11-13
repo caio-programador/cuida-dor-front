@@ -1,5 +1,7 @@
 // pages/register/controller/register.controller.dart
 import 'package:flutter/material.dart';
+import 'package:trabalho_cuidador/pages/home_page.dart';
+import 'package:trabalho_cuidador/services/user_service.dart';
 
 class RegisterController extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
@@ -94,11 +96,6 @@ class RegisterController extends ChangeNotifier {
       return 'A senha deve ter pelo menos 6 caracteres';
     }
 
-    // Validações adicionais opcionais
-    // if (!value.contains(RegExp(r'[A-Z]'))) {
-    //   return 'A senha deve conter pelo menos uma letra maiúscula';
-    // }
-
     return null;
   }
 
@@ -123,28 +120,23 @@ class RegisterController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Simula chamada ao backend
-      await Future.delayed(const Duration(seconds: 2));
-
-      // Aqui você fará a chamada real ao AuthService
-      // final success = await AuthService.register(
-      //   name: nameController.text,
-      //   email: emailController.text,
-      //   password: passwordController.text,
-      //   gender: _selectedGender,
-      //   comorbidities: _selectedComorbidities,
-      // );
-
-      print('Nome: ${nameController.text}');
-      print('Email: ${emailController.text}');
-      print('Sexo: $_selectedGender');
-      print('Comorbidades: $_selectedComorbidities');
-      print('Password: ${passwordController.text}');
-
-      // Simula sucesso
-      // if (success) { ... }
+      await UserService.register({
+        "name": nameController.text,
+        "email": emailController.text,
+        "password": passwordController.text,
+        "gender": _selectedGender,
+        "comorbidities": _selectedComorbidities,
+      });
+      if (formKey.currentContext != null && formKey.currentContext!.mounted) {
+        Navigator.pushReplacement(
+          formKey.currentContext!,
+          MaterialPageRoute(builder: (_) => const HomeView()),
+        );
+      }
     } catch (e) {
-      print('Erro ao fazer registro: $e');
+      ScaffoldMessenger.of(
+        formKey.currentContext!,
+      ).showSnackBar(SnackBar(content: Text('Erro ao fazer registro: $e')));
     } finally {
       _isLoading = false;
       notifyListeners();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
 import 'package:trabalho_cuidador/pages/home/view/home.view.dart';
 import 'package:trabalho_cuidador/pages/login/view/login.view.dart';
@@ -19,13 +20,14 @@ class _MyAppState extends State<MyApp> {
   bool? isLoggedIn;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    checkLogin();
+    await dotenv.load(fileName: ".env");
+    await checkLogin();
   }
 
   Future<void> checkLogin() async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
     final logged = await AuthService.isUserLoggedIn();
     setState(() => isLoggedIn = logged);
   }
