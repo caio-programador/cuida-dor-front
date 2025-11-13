@@ -57,12 +57,16 @@ class LoginController extends ChangeNotifier {
 
     try {
       await AuthService.login(emailController.text, passwordController.text);
-      Navigator.pushReplacement(
-        formKey.currentContext!,
-        MaterialPageRoute(builder: (_) => const HomeView()),
-      );
+      if (formKey.currentContext != null) {
+        Navigator.pushReplacement(
+          formKey.currentContext!,
+          MaterialPageRoute(builder: (_) => const HomeView()),
+        );
+      }
     } catch (e) {
-      print('Erro ao fazer login: $e');
+      ScaffoldMessenger.of(
+        formKey.currentContext!,
+      ).showSnackBar(SnackBar(content: Text('Erro ao fazer login: $e')));
     } finally {
       _isLoading = false;
       notifyListeners();

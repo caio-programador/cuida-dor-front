@@ -20,14 +20,14 @@ class _MyAppState extends State<MyApp> {
   bool? isLoggedIn;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    checkLogin();
-    dotenv.load(fileName: ".env");
+    await dotenv.load(fileName: ".env");
+    await checkLogin();
   }
 
   Future<void> checkLogin() async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
     final logged = await AuthService.isUserLoggedIn();
     setState(() => isLoggedIn = logged);
   }

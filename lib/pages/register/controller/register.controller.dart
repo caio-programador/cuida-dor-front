@@ -30,8 +30,6 @@ class RegisterController extends ChangeNotifier {
     'Outra',
   ];
 
-  static final userService = UserService();
-
   void togglePasswordVisibility() {
     _isPasswordVisible = !_isPasswordVisible;
     notifyListeners();
@@ -122,19 +120,23 @@ class RegisterController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await userService.register({
+      await UserService.register({
         "name": nameController.text,
         "email": emailController.text,
         "password": passwordController.text,
         "gender": _selectedGender,
         "comorbidities": _selectedComorbidities,
       });
-      Navigator.pushReplacement(
-        formKey.currentContext!,
-        MaterialPageRoute(builder: (_) => const HomeView()),
-      );
+      if (formKey.currentContext != null && formKey.currentContext!.mounted) {
+        Navigator.pushReplacement(
+          formKey.currentContext!,
+          MaterialPageRoute(builder: (_) => const HomeView()),
+        );
+      }
     } catch (e) {
-      print('Erro ao fazer registro: $e'); // tela de erro
+      ScaffoldMessenger.of(
+        formKey.currentContext!,
+      ).showSnackBar(SnackBar(content: Text('Erro ao fazer registro: $e')));
     } finally {
       _isLoading = false;
       notifyListeners();

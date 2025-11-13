@@ -5,7 +5,7 @@ import 'package:trabalho_cuidador/utils/jwt_token.dart';
 class UserService {
   static final ApiClient _api = ApiClient();
 
-  Future<void> register(Map<String, dynamic> userData) async {
+  static Future<void> register(Map<String, dynamic> userData) async {
     final response = await _api.post<Map<String, dynamic>>(
       '/user/register',
       userData,

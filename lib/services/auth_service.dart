@@ -9,9 +9,11 @@ class AuthService {
   static Future<bool> isUserLoggedIn() async {
     String? token = await JwtToken.getToken();
     if (token != null) {
+      _api.setToken(token);
       _loggedIn = true;
     } else {
       _loggedIn = false;
+      _api.setToken(null);
     }
     return _loggedIn;
   }
