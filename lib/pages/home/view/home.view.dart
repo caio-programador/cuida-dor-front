@@ -7,7 +7,8 @@ import '../components/pain_chart.dart';
 import '../components/empty_pain_card.dart';
 import '../components/info_card.dart';
 import '../components/action_button.dart';
-import 'package:trabalho_cuidador/utils/genericError.dart';
+import 'package:trabalho_cuidador/pages/error-generic/view/genericError.dart';
+import 'package:trabalho_cuidador/pages/check-generic/view/genericCheck.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -54,6 +55,7 @@ class _HomeViewState extends State<HomeView> {
             onPressed: () {
               // Navegar para perfil
               print('Perfil');
+              // ! REMOVER APÓS TESTES TELA DE ERRO GENÉRICO
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -130,6 +132,19 @@ class _HomeViewState extends State<HomeView> {
               onPressed: () {
                 // Navegar para registrar dor
                 print('Registrar dor');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GenericCheckPage(
+                      title: 'Sucesso ao registrar a sua dor',
+                      description:
+                          'Dor registrada com sucesso. Que tal tentar um exercício pra aliviar? Clique abaixo e bora se mexer.',
+                      buttonAlleviateLabel: 'Aliviar a dor',
+                      onAlleviate: () => Navigator.pop(context),
+                      onHome: () => Navigator.pop(context),
+                    ),
+                  ),
+                );
               },
             ),
             const SizedBox(height: 16),
@@ -141,6 +156,19 @@ class _HomeViewState extends State<HomeView> {
               onPressed: () {
                 // Navegar para aliviar dor
                 print('Aliviar dor');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GenericCheckPage(
+                      title: 'Sucesso ao aliviar a sua dor',
+                      description:
+                          'Dor aliviada com sucesso! Continue praticando exercícios para manter o bem-estar. Clique abaixo para voltar.',
+                      buttonAlleviateLabel: 'Registrar nova dor',
+                      onAlleviate: () => Navigator.pop(context),
+                      onHome: () => Navigator.pop(context),
+                    ),
+                  ),
+                );
               },
             ),
             const SizedBox(height: 24),
