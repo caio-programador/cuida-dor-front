@@ -1,14 +1,14 @@
 // pages/home/view/home.view.dart
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
+import 'package:trabalho_cuidador/pages/error_generic_page.dart';
+import 'package:trabalho_cuidador/pages/generic_check_page.dart';
 import '../controller/home.controller.dart';
 import '../components/home_drawer.dart';
 import '../components/pain_chart.dart';
 import '../components/empty_pain_card.dart';
 import '../components/info_card.dart';
 import '../components/action_button.dart';
-import 'package:trabalho_cuidador/pages/error-generic/view/genericError.dart';
-import 'package:trabalho_cuidador/pages/check-generic/view/genericCheck.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
