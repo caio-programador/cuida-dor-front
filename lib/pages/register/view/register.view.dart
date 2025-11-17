@@ -107,9 +107,12 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 const SizedBox(height: 24),
 
-                const Text(
+                Text(
                   'Comorbidades:',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 AnimatedBuilder(
@@ -165,14 +168,16 @@ class _RegisterViewState extends State<RegisterView> {
                   );
                 },
                 child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(fontSize: 18, color: AppTheme.textDark),
+                  text: TextSpan(
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(fontSize: 16),
                     children: [
-                      TextSpan(text: 'Já possui conta? '),
+                      const TextSpan(text: 'Já possui conta? '),
                       TextSpan(
                         text: 'Faça o login',
                         style: TextStyle(
-                          color: AppTheme.primary,
+                          color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

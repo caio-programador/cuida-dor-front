@@ -37,9 +37,12 @@ class LoginButton extends StatelessWidget {
                   strokeWidth: 2,
                 ),
               )
-            : const Text(
+            : Text(
                 'Entrar',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
       ),
     );

@@ -37,12 +37,12 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: AppTheme.background,
       appBar: AppBar(
-        backgroundColor: AppTheme.background,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: Builder(
           builder: (context) {
             return IconButton(
-              icon: const Icon(Icons.menu, color: AppTheme.textDark),
+              icon: Icon(Icons.menu, color: Theme.of(context).iconTheme.color),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -51,7 +51,10 @@ class _HomeViewState extends State<HomeView> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_outline, color: AppTheme.textDark),
+            icon: Icon(
+              Icons.person_outline,
+              color: Theme.of(context).iconTheme.color,
+            ),
             onPressed: () {
               // Navegar para perfil
               print('Perfil');
@@ -71,8 +74,10 @@ class _HomeViewState extends State<HomeView> {
         animation: _controller,
         builder: (context, _) {
           if (_controller.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(color: AppTheme.primary),
+            return Center(
+              child: CircularProgressIndicator(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             );
           }
 
@@ -84,16 +89,17 @@ class _HomeViewState extends State<HomeView> {
                 // Título de boas-vindas
                 RichText(
                   text: TextSpan(
-                    style: const TextStyle(
-                      fontSize: 32,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.textDark,
                     ),
                     children: [
                       TextSpan(text: 'Bem vindo ${_controller.userName} ao '),
                       TextSpan(
                         text: 'CuidaDor',
-                        style: TextStyle(color: AppTheme.primary),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     ],
                   ),

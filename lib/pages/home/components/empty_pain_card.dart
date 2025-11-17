@@ -17,25 +17,26 @@ class EmptyPainCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Icon(Icons.bar_chart_outlined, size: 80, color: AppTheme.secondary),
+          Icon(
+            Icons.bar_chart_outlined,
+            size: 80,
+            color: Theme.of(context).disabledColor,
+          ),
           const SizedBox(height: 16),
           Text(
             'Nenhuma dor registrada',
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppTheme.terciary,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             'Comece registrando sua primeira dor\npara visualizar o gráfico',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              color: AppTheme.terciary,
-              height: 1.5,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontSize: 14, height: 1.5),
           ),
         ],
       ),
