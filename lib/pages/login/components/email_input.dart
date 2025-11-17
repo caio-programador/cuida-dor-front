@@ -13,24 +13,30 @@ class EmailInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Email:',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           validator: validator,
           keyboardType: TextInputType.emailAddress,
+          style: Theme.of(context).textTheme.bodyMedium,
           decoration: InputDecoration(
             hintText: 'joao@email.com...',
-            hintStyle: TextStyle(color: AppTheme.secondary),
+            hintStyle: TextStyle(color: Theme.of(context).hintColor),
             border: const UnderlineInputBorder(),
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppTheme.secondary),
+              borderSide: BorderSide(color: Theme.of(context).dividerColor),
             ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: AppTheme.primary),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
             errorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: AppTheme.redDanger),

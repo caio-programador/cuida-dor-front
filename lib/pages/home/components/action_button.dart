@@ -22,11 +22,18 @@ class ActionButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: isPrimary ? AppTheme.primary : AppTheme.background,
-          foregroundColor: isPrimary ? AppTheme.background : AppTheme.primary,
+          backgroundColor: isPrimary
+              ? Theme.of(context).colorScheme.primary
+              : AppTheme.background,
+          foregroundColor: isPrimary
+              ? AppTheme.background
+              : Theme.of(context).colorScheme.primary,
           side: isPrimary
               ? null
-              : const BorderSide(color: AppTheme.primary, width: 2),
+              : BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2,
+                ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),
@@ -34,7 +41,12 @@ class ActionButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: isPrimary
+                ? AppTheme.background
+                : Theme.of(context).colorScheme.primary,
+          ),
         ),
       ),
     );

@@ -93,14 +93,17 @@ class _LoginViewState extends State<LoginView> {
                   );
                 },
                 child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(fontSize: 18, color: AppTheme.textDark),
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 16,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
+                    ),
                     children: [
-                      TextSpan(text: 'Não possui conta? '),
+                      const TextSpan(text: 'Não possui conta? '),
                       TextSpan(
                         text: 'Faça o cadastro',
                         style: TextStyle(
-                          color: AppTheme.primary,
+                          color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

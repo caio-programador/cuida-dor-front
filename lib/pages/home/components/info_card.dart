@@ -1,6 +1,5 @@
 // pages/home/components/info_card.dart
 import 'package:flutter/material.dart';
-import 'package:trabalho_cuidador/core/app_theme.dart';
 
 class InfoCard extends StatelessWidget {
   const InfoCard({super.key});
@@ -11,12 +10,19 @@ class InfoCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: Border.all(color: AppTheme.primary, width: 2),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary,
+          width: 2,
+        ),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
-          Icon(Icons.info_outline, color: AppTheme.primary, size: 28),
+          Icon(
+            Icons.info_outline,
+            color: Theme.of(context).colorScheme.primary,
+            size: 28,
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -24,21 +30,23 @@ class InfoCard extends StatelessWidget {
               children: [
                 Text(
                   'Informações sobre a dor',
-                  style: TextStyle(
-                    fontSize: 16,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppTheme.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'Saiba mais sobre suas dores',
-                  style: TextStyle(fontSize: 14, color: AppTheme.terciary),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
                 ),
               ],
             ),
           ),
-          Icon(Icons.chevron_right, color: AppTheme.primary),
+          Icon(
+            Icons.chevron_right,
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ],
       ),
     );
