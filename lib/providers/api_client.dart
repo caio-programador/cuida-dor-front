@@ -7,7 +7,7 @@ class ApiClient {
 
   final http.Client _client = http.Client();
 
-  String? _token;
+  static String? _token;
 
   void setToken(String? token) {
     _token = token;

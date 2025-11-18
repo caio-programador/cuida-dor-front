@@ -1,5 +1,7 @@
 // pages/home/controller/home.controller.dart
 import 'package:flutter/material.dart';
+import 'package:trabalho_cuidador/models/user.dart';
+import 'package:trabalho_cuidador/services/user_service.dart';
 
 class HomeController extends ChangeNotifier {
   // Simulação: true = tem dados, false = não tem dados
@@ -18,26 +20,19 @@ class HomeController extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    try {
-      // Simula chamada ao backend
-      await Future.delayed(const Duration(seconds: 1));
-
-      // Aqui você fará a chamada real ao backend
-      // final userData = await ApiService.getUserData();
-      // _userName = userData.name;
-      // _hasPainData = userData.hasPainData;
-      // _chartImageUrl = userData.chartImageUrl;
-
-      // Simulação
-      _userName = 'Neymar Jr';
-      _hasPainData = true; // Mude para false para testar o card vazio
-      _chartImageUrl = null; // URL da imagem do gráfico virá do backend
-    } catch (e) {
-      print('Erro ao carregar dados: $e');
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
+    // try {
+    // Simula chamada ao backend
+    await Future.delayed(const Duration(seconds: 1));
+    User user = await UserService.getProfile();
+    _userName = user.name!;
+    _hasPainData = true; // Mude para false para testar o card vazio
+    _chartImageUrl = null; // URL da imagem do gráfico virá do backend
+    // } catch (e) {
+    // print('Erro ao carregar dados da home: $e');
+    // } finally {
+    _isLoading = false;
+    notifyListeners();
+    // }
   }
 
   void setHasPainData(bool value) {

@@ -11,15 +11,14 @@ class UserService {
       userData,
       (data) => data as Map<String, dynamic>,
     );
-
-    _api.setToken(response['token']);
     await JwtToken.saveToken(response['token']);
   }
 
-  Future<User> getProfile() async {
-    return await _api.get<User>(
+  static Future<User> getProfile() async {
+    final response = await _api.get<User>(
       '/user/profile',
       (json) => User.fromJson(json as Map<String, dynamic>),
     );
+    return response;
   }
 }

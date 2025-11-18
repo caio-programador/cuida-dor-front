@@ -9,19 +9,13 @@ enum SexUser {
 }
 
 class User {
-  final int id;
-  final String name;
-  final String email;
-  final SexUser sex;
-  final String comorbidities;
+  final int? id;
+  final String? name;
+  final String? email;
+  final SexUser? sex;
+  final String? comorbidities;
 
-  User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.sex,
-    required this.comorbidities,
-  });
+  User({this.id, this.name, this.email, this.sex, this.comorbidities});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -29,17 +23,7 @@ class User {
       name: json['name'],
       email: json['email'],
       sex: SexUser.values.firstWhere((e) => e.value == json['sex']),
-      comorbidities: json['comorbidities'],
+      comorbidities: json['comorbidades'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'email': email,
-      'sex': sex.value,
-      'comorbidities': comorbidities,
-    };
   }
 }

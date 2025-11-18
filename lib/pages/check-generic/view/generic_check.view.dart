@@ -20,17 +20,18 @@ class GenericCheckPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(0xFF4ECB71),
+        color: Theme.of(context).primaryColor,
         child: SafeArea(
           child: Column(
             children: [
+              SizedBox(height: 64),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.check_circle, color: Colors.black54, size: 48),
+                      Icon(Icons.check_circle, color: Colors.black54, size: 64),
                       SizedBox(height: 24),
                       Text(
                         title,
@@ -43,11 +44,9 @@ class GenericCheckPage extends StatelessWidget {
                       SizedBox(height: 16),
                       Text(
                         description,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black87,
-                          height: 1.5,
-                        ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(),
                       ),
                     ],
                   ),
@@ -63,7 +62,7 @@ class GenericCheckPage extends StatelessWidget {
                         onPressed: onAlleviate,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
-                          foregroundColor: Color(0xFF4ECB71),
+                          foregroundColor: Theme.of(context).primaryColor,
                           padding: EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),

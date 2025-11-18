@@ -124,8 +124,8 @@ class RegisterController extends ChangeNotifier {
         "name": nameController.text,
         "email": emailController.text,
         "password": passwordController.text,
-        "gender": _selectedGender,
-        "comorbidities": _selectedComorbidities,
+        "sex": _selectedGender,
+        "comorbidades": _selectedComorbidities,
       });
       if (formKey.currentContext != null && formKey.currentContext!.mounted) {
         Navigator.pushReplacement(
