@@ -13,10 +13,14 @@ class TermsView extends StatelessWidget {
         backgroundColor: AppTheme.background,
         elevation: 0,
         centerTitle: true,
+        automaticallyImplyLeading: false,
         actionsPadding: EdgeInsets.all(8),
         actions: [
           IconButton(
-            icon: const Icon(Icons.close, color: AppTheme.primary),
+            icon: Icon(
+              Icons.close,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ],
