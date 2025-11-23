@@ -12,7 +12,9 @@ import '../components/register_pain_button.dart';
 import '../../check-generic/view/generic_check.view.dart';
 
 class RegisterPainView extends StatefulWidget {
-  const RegisterPainView({super.key});
+  const RegisterPainView({super.key, required this.entryPoint});
+
+  final String? entryPoint;
 
   @override
   State<RegisterPainView> createState() => _RegisterPainViewState();

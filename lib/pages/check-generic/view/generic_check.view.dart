@@ -8,13 +8,13 @@ class GenericCheckPage extends StatelessWidget {
   final VoidCallback onHome;
 
   const GenericCheckPage({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     this.buttonAlleviateLabel = 'Aliviar a dor',
     required this.onAlleviate,
     required this.onHome,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -25,7 +25,10 @@ class _PainReliefViewState extends State<PainReliefView> {
   }
 
   void _handleNavigateRegisterPain() {
-    Modal.redirectModal(context, const RegisterPainView());
+    Modal.redirectModal(
+      context,
+      RegisterPainView(entryPoint: 'AFTER_RELIEF_TECHNIQUES'),
+    );
   }
 
   void _handleContinue() {

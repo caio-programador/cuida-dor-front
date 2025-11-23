@@ -27,7 +27,7 @@ class GenderDropdown extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: value,
+          initialValue: value,
           validator: validator,
           decoration: InputDecoration(
             border: const UnderlineInputBorder(),

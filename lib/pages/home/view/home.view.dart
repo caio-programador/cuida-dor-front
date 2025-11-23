@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
 import 'package:trabalho_cuidador/pages/error_generic_page.dart';
-import 'package:trabalho_cuidador/pages/generic_check_page.dart';
 import 'package:trabalho_cuidador/pages/pain_relief_page.dart';
 import 'package:trabalho_cuidador/pages/register-pain/view/register_pain.view.dart';
 import 'package:trabalho_cuidador/utils/modal.dart';
@@ -139,7 +138,12 @@ class _HomeViewState extends State<HomeView> {
             ActionButton(
               text: 'Registrar Dor',
               onPressed: () {
-                Modal.openFullScreen(context, const RegisterPainView());
+                Modal.openFullScreen(
+                  context,
+                  const RegisterPainView(
+                    entryPoint: 'BEFORE_RELIEF_TECHNIQUES',
+                  ),
+                );
               },
             ),
             const SizedBox(height: 16),
