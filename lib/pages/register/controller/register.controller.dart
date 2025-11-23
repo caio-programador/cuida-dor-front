@@ -118,14 +118,15 @@ class RegisterController extends ChangeNotifier {
 
     _isLoading = true;
     notifyListeners();
+    String comorbidades = _selectedComorbidities.join(", ");
 
     try {
       await UserService.register({
         "name": nameController.text,
         "email": emailController.text,
         "password": passwordController.text,
-        "sex": _selectedGender,
-        "comorbidades": _selectedComorbidities,
+        "sex": _selectedGender?.toLowerCase(),
+        "comorbidades": comorbidades,
       });
       if (formKey.currentContext != null && formKey.currentContext!.mounted) {
         Navigator.pushReplacement(
@@ -136,7 +137,7 @@ class RegisterController extends ChangeNotifier {
     } catch (e) {
       ScaffoldMessenger.of(
         formKey.currentContext!,
-      ).showSnackBar(SnackBar(content: Text('Erro ao fazer registro: $e')));
+      ).showSnackBar(SnackBar(content: Text('Erro ao fazer registro')));
     } finally {
       _isLoading = false;
       notifyListeners();

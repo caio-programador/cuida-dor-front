@@ -1,5 +1,7 @@
 // pages/register-pain/components/register_pain_button.dart
 import 'package:flutter/material.dart';
+import 'package:trabalho_cuidador/pages/error_generic_page.dart';
+import 'package:trabalho_cuidador/utils/modal.dart';
 import '../controller/register_pain.controller.dart';
 
 class RegisterPainButton extends StatelessWidget {
@@ -22,6 +24,15 @@ class RegisterPainButton extends StatelessWidget {
                 final success = await controller.registerPain();
                 if (success && context.mounted) {
                   onSuccess();
+                } else {
+                  Modal.redirectModal(
+                    context,
+                    ErrorGenericView(
+                      onGoHome: () =>
+                          Navigator.popUntil(context, (route) => route.isFirst),
+                      onRetry: () => Navigator.pop(context),
+                    ),
+                  );
                 }
               }
             : null,
@@ -33,14 +44,25 @@ class RegisterPainButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(25),
           ),
         ),
-        child: Text(
-          'Registrar Dor',
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: controller.canRegister ? Colors.white : Colors.grey.shade600,
-          ),
-        ),
+        child: controller.isLoading
+            ? const SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : Text(
+                'Registrar Dor',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: controller.canRegister
+                      ? Colors.white
+                      : Colors.grey.shade600,
+                ),
+              ),
       ),
     );
   }

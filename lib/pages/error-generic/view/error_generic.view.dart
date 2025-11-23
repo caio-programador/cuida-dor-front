@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
 
-class ErroGenericoPage extends StatelessWidget {
+class ErrorGenericView extends StatelessWidget {
   final VoidCallback? onRetry;
   final VoidCallback? onGoHome;
 
-  const ErroGenericoPage({super.key, this.onRetry, this.onGoHome});
+  const ErrorGenericView({super.key, this.onRetry, this.onGoHome});
 
   @override
   Widget build(BuildContext context) {

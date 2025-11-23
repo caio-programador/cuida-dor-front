@@ -1,7 +1,6 @@
 // pages/home/view/home.view.dart
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
-import 'package:trabalho_cuidador/pages/error_generic_page.dart';
 import 'package:trabalho_cuidador/pages/pain_relief_page.dart';
 import 'package:trabalho_cuidador/pages/register-pain/view/register_pain.view.dart';
 import 'package:trabalho_cuidador/utils/modal.dart';
@@ -60,13 +59,6 @@ class _HomeViewState extends State<HomeView> {
             onPressed: () {
               // Navegar para perfil
               print('Perfil');
-              // ! REMOVER APÓS TESTES TELA DE ERRO GENÉRICO
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ErroGenericoPage(),
-                ),
-              );
             },
           ),
         ],
@@ -83,49 +75,52 @@ class _HomeViewState extends State<HomeView> {
             );
           }
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Título de boas-vindas
-                RichText(
-                  text: TextSpan(
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    children: [
-                      TextSpan(text: 'Bem vindo ${_controller.userName} ao '),
-                      TextSpan(
-                        text: 'CuidaDor',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+          return RefreshIndicator(
+            onRefresh: () => _controller.loadUserData(),
+            color: Theme.of(context).colorScheme.primary,
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Título de boas-vindas
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontSize: 28, fontWeight: FontWeight.bold),
+                      children: [
+                        TextSpan(text: 'Bem vindo ${_controller.userName} ao '),
+                        TextSpan(
+                          text: 'CuidaDor',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 96),
+                  const SizedBox(height: 96),
 
-                // Gráfico ou Card vazio
-                _controller.hasPainData
-                    ? PainChart(imageUrl: _controller.chartImageUrl)
-                    : const EmptyPainCard(),
-                const SizedBox(height: 24),
+                  // Gráfico ou Card vazio
+                  _controller.hasPainData
+                      ? PainChart(base64Image: _controller.chartBase64)
+                      : const EmptyPainCard(),
+                  const SizedBox(height: 24),
 
-                // Card de informações
-                GestureDetector(
-                  onTap: () {
-                    // Navegar para informações sobre dor
-                    print('Informações sobre dor');
-                  },
-                  child: const InfoCard(),
-                ),
-                const SizedBox(height: 24),
+                  // Card de informações
+                  GestureDetector(
+                    onTap: () {
+                      // Navegar para informações sobre dor
+                      print('Informações sobre dor');
+                    },
+                    child: const InfoCard(),
+                  ),
+                  const SizedBox(height: 24),
 
-                // Botão Registrar Dor
-              ],
+                  // Botão Registrar Dor
+                ],
+              ),
             ),
           );
         },

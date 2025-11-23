@@ -14,14 +14,16 @@ import '../../check-generic/view/generic_check.view.dart';
 class RegisterPainView extends StatefulWidget {
   const RegisterPainView({super.key, required this.entryPoint});
 
-  final String? entryPoint;
+  final String entryPoint;
 
   @override
   State<RegisterPainView> createState() => _RegisterPainViewState();
 }
 
 class _RegisterPainViewState extends State<RegisterPainView> {
-  final _controller = RegisterPainController();
+  late final _controller = RegisterPainController(
+    entryPoint: widget.entryPoint,
+  );
 
   void _handleNavigateAlleviate() {
     Modal.redirectModal(context, PainReliefView());

@@ -12,6 +12,7 @@ class UserService {
       (data) => data as Map<String, dynamic>,
     );
     await JwtToken.saveToken(response['token']);
+    _api.setToken(response['token']);
   }
 
   static Future<User> getProfile() async {

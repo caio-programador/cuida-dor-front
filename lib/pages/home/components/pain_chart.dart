@@ -1,11 +1,12 @@
 // pages/home/components/pain_chart.dart
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
 
 class PainChart extends StatelessWidget {
-  final String? imageUrl;
+  final String? base64Image;
 
-  const PainChart({super.key, this.imageUrl});
+  const PainChart({super.key, this.base64Image});
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +17,31 @@ class PainChart extends StatelessWidget {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(12),
       ),
-      child: imageUrl != null && imageUrl!.isNotEmpty
-          ? Image.network(
-              imageUrl!,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) {
-                return _buildPlaceholderChart();
-              },
-            )
+      child: base64Image != null && base64Image!.isNotEmpty
+          ? _buildBase64Image()
           : _buildPlaceholderChart(),
     );
+  }
+
+  Widget _buildBase64Image() {
+    try {
+      // Remove o prefixo "data:image/...;base64," se existir
+      String cleanBase64 = base64Image!;
+      if (cleanBase64.contains(',')) {
+        cleanBase64 = cleanBase64.split(',').last;
+      }
+
+      final bytes = base64Decode(cleanBase64);
+      return Image.memory(
+        bytes,
+        fit: BoxFit.contain,
+        errorBuilder: (context, error, stackTrace) {
+          return _buildPlaceholderChart();
+        },
+      );
+    } catch (e) {
+      return _buildPlaceholderChart();
+    }
   }
 
   Widget _buildPlaceholderChart() {

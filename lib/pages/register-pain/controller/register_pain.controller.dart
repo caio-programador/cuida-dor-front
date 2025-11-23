@@ -1,6 +1,7 @@
 // pages/register-pain/controller/register_pain.controller.dart
 import 'package:flutter/material.dart';
 import 'package:body_part_selector/body_part_selector.dart';
+import 'package:trabalho_cuidador/services/pain_service.dart';
 
 enum PainLevel {
   semDor(0, 'SEM DOR', Color(0xFF4ECDC4)),
@@ -28,16 +29,19 @@ class RegisterPainController extends ChangeNotifier {
   BodyParts _selectedBodyParts = const BodyParts();
   String? _selectedLocation;
   PainLevel? _selectedPainLevel;
+  final String entryPoint;
   double _painIntensity = 0;
+  bool _isLoading = false;
 
   BodyParts get selectedBodyParts => _selectedBodyParts;
   String? get selectedLocation => _selectedLocation;
   PainLevel? get selectedPainLevel => _selectedPainLevel;
   double get painIntensity => _painIntensity;
+  bool get isLoading => _isLoading;
   bool get canRegister =>
-      _selectedLocation != null && _selectedPainLevel != null;
+      _selectedLocation != null && _selectedPainLevel != null && !_isLoading;
 
-  // Mapeamento de IDs para strings em português
+  RegisterPainController({required this.entryPoint});
   final Map<String, String> _bodyPartLabels = {
     'head': 'Cabeça',
     'neck': 'Pescoço',
@@ -164,15 +168,24 @@ class RegisterPainController extends ChangeNotifier {
   }
 
   Future<bool> registerPain() async {
-    if (!canRegister) return false;
+    if (_selectedLocation == null || _selectedPainLevel == null) return false;
 
-    // Aqui você faria a chamada para a API
-    // Por enquanto, apenas simula um delay
-    await Future.delayed(const Duration(seconds: 1));
+    _isLoading = true;
+    notifyListeners();
 
-    // Sucesso - limpa os dados
-    reset();
-    return true;
+    try {
+      await PainService.registerPain(
+        painLocale: _selectedLocation!,
+        painScale: _selectedPainLevel!.value,
+        type: entryPoint,
+      );
+      reset();
+      return true;
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+      return false;
+    }
   }
 
   void reset() {
@@ -180,6 +193,7 @@ class RegisterPainController extends ChangeNotifier {
     _selectedLocation = null;
     _selectedPainLevel = null;
     _painIntensity = 0;
+    _isLoading = false;
     notifyListeners();
   }
 }
