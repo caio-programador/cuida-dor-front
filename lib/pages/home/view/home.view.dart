@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
 import 'package:trabalho_cuidador/pages/pain_relief_page.dart';
 import 'package:trabalho_cuidador/pages/register-pain/view/register_pain.view.dart';
+import 'package:trabalho_cuidador/pages/more-info/view/more_info.view.dart';
 import 'package:trabalho_cuidador/utils/modal.dart';
 import '../controller/home.controller.dart';
 import '../components/home_drawer.dart';
@@ -113,6 +114,7 @@ class _HomeViewState extends State<HomeView> {
                     onTap: () {
                       // Navegar para informações sobre dor
                       print('Informações sobre dor');
+                      Modal.openFullScreen(context, const MoreInfoView());
                     },
                     child: const InfoCard(),
                   ),
