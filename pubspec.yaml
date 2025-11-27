@@ -44,6 +44,8 @@ dependencies:
   timezone: ^0.9.4
 
 dev_dependencies:
+  rename: ^3.0.2
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
 
@@ -54,6 +56,13 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
 
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/cuidador-icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/cuidador-icon.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -61,8 +70,6 @@ dev_dependencies:
 flutter:
   assets:
     - .env
-    - assets/body.png
-    - assets/pain-scale.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
