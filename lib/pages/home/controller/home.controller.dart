@@ -1,8 +1,9 @@
 // pages/home/controller/home.controller.dart
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/models/user.dart';
-import 'package:trabalho_cuidador/services/pain_service.dart';
 import 'package:trabalho_cuidador/services/user_service.dart';
+import 'package:trabalho_cuidador/services/pain_service.dart';
+import 'package:trabalho_cuidador/services/notification_service.dart';
 
 class HomeController extends ChangeNotifier {
   // Simulação: true = tem dados, false = não tem dados
@@ -20,6 +21,11 @@ class HomeController extends ChangeNotifier {
   Future<void> loadUserData() async {
     _isLoading = true;
     notifyListeners();
+
+    // Atualiza a última sessão do usuário
+    await NotificationService.updateLastSession();
+    // Agenda próxima notificação
+    await NotificationService.scheduleNextNotification();
 
     try {
       await Future.delayed(const Duration(seconds: 1));

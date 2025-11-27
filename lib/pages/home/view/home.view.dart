@@ -113,8 +113,6 @@ class _HomeViewState extends State<HomeView> {
                   // Card de informações
                   GestureDetector(
                     onTap: () {
-                      // Navegar para informações sobre dor
-                      print('Informações sobre dor');
                       Modal.openFullScreen(context, const MoreInfoView());
                     },
                     child: const InfoCard(),

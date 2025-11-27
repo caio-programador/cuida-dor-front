@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:body_part_selector/body_part_selector.dart';
 import 'package:trabalho_cuidador/services/pain_service.dart';
+import 'package:trabalho_cuidador/services/notification_service.dart';
 
 enum PainLevel {
   semDor(0, 'SEM DOR', Color(0xFF4ECDC4)),
@@ -179,6 +180,11 @@ class RegisterPainController extends ChangeNotifier {
         painScale: _selectedPainLevel!.value,
         type: entryPoint,
       );
+
+      // Atualiza a sessão e reagenda notificação
+      await NotificationService.updateLastSession();
+      await NotificationService.scheduleNextNotification();
+
       reset();
       return true;
     } catch (e) {

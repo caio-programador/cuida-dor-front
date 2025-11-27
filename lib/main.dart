@@ -6,8 +6,11 @@ import 'package:trabalho_cuidador/pages/home/view/home.view.dart';
 import 'package:trabalho_cuidador/pages/login/view/login.view.dart';
 import 'package:trabalho_cuidador/providers/accessibility_provider.dart';
 import 'services/auth_service.dart';
+import 'services/notification_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initialize();
   runApp(
     ChangeNotifierProvider(
       create: (_) => AccessibilityProvider(),

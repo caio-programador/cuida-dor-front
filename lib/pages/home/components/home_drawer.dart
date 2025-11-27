@@ -1,5 +1,6 @@
 // pages/home/components/home_drawer.dart
 import 'package:flutter/material.dart';
+import 'package:trabalho_cuidador/pages/edit-profile/view/edit_profile.view.dart';
 import 'package:trabalho_cuidador/utils/modal.dart';
 import '../../login/view/login.view.dart';
 import '../../accessibility/view/accessibility.view.dart';
@@ -44,8 +45,8 @@ class HomeDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              // Navegar para página de editar perfil
-              print('Editar perfil');
+
+              Modal.openFullScreen(context, const EditProfileView());
             },
           ),
           ListTile(
