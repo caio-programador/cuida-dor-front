@@ -67,6 +67,24 @@ class ApiClient {
       throw ApiException(message: e.toString());
     }
   }
+
+  Future<void> patch(String endpoint, Map<String, dynamic> body) async {
+    try {
+      final response = await _client.patch(
+        Uri.parse('$baseUrl$endpoint'),
+        headers: _headers,
+        body: json.encode(body),
+      );
+      if (response.statusCode != 200 && response.statusCode != 204) {
+        throw ApiException(
+          statusCode: response.statusCode,
+          message: response.body,
+        );
+      }
+    } catch (e) {
+      throw ApiException(message: e.toString());
+    }
+  }
 }
 
 class ApiException implements Exception {

@@ -4,6 +4,7 @@ import 'package:trabalho_cuidador/core/app_theme.dart';
 import 'package:trabalho_cuidador/pages/pain_relief_page.dart';
 import 'package:trabalho_cuidador/pages/register-pain/view/register_pain.view.dart';
 import 'package:trabalho_cuidador/pages/more-info/view/more_info.view.dart';
+import 'package:trabalho_cuidador/pages/edit-profile/view/edit_profile.view.dart';
 import 'package:trabalho_cuidador/utils/modal.dart';
 import '../controller/home.controller.dart';
 import '../components/home_drawer.dart';
@@ -57,9 +58,9 @@ class _HomeViewState extends State<HomeView> {
               Icons.person_outline,
               color: Theme.of(context).iconTheme.color,
             ),
-            onPressed: () {
-              // Navegar para perfil
-              print('Perfil');
+            onPressed: () async {
+              await Modal.openFullScreen(context, const EditProfileView());
+              _controller.loadUserData();
             },
           ),
         ],
@@ -134,13 +135,14 @@ class _HomeViewState extends State<HomeView> {
           children: [
             ActionButton(
               text: 'Registrar Dor',
-              onPressed: () {
-                Modal.openFullScreen(
+              onPressed: () async {
+                await Modal.openFullScreen(
                   context,
                   const RegisterPainView(
                     entryPoint: 'BEFORE_RELIEF_TECHNIQUES',
                   ),
                 );
+                _controller.loadUserData();
               },
             ),
             const SizedBox(height: 16),

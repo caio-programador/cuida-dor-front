@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class Modal {
-  static void openFullScreen(BuildContext context, Widget child) {
-    Navigator.of(context).push(
+  static Future<T?> openFullScreen<T>(BuildContext context, Widget child) {
+    return Navigator.of(context).push<T>(
       PageRouteBuilder(
         opaque: false,
         barrierColor: Colors.transparent,

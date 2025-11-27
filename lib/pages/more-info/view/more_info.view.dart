@@ -36,7 +36,6 @@ class _MoreInfoViewState extends State<MoreInfoView> {
         backgroundColor: AppTheme.background,
         elevation: 0,
         centerTitle: true,
-        automaticallyImplyLeading: false,
         actionsPadding: EdgeInsets.all(8),
         actions: [
           IconButton(
@@ -50,7 +49,7 @@ class _MoreInfoViewState extends State<MoreInfoView> {
         title: const Text(
           'Informações sobre a dor',
           style: TextStyle(
-            color: AppTheme.textDark,
+            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

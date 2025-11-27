@@ -22,4 +22,8 @@ class UserService {
     );
     return response;
   }
+
+  static Future<void> updateProfile(Map<String, dynamic> userData) async {
+    await _api.patch('/user/${userData['id']}', userData);
+  }
 }
