@@ -43,20 +43,24 @@ class NotificationService {
   }
 
   static Future<void> _requestPermissions() async {
-    if (await _notifications
-            .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin
-            >()
-            ?.areNotificationsEnabled() ??
-        false) {
-      return;
-    }
-
-    await _notifications
+    final androidImpl = _notifications
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
-        >()
-        ?.requestNotificationsPermission();
+        >();
+
+    if (androidImpl == null) return;
+
+    // Solicita permissão de notificações
+    final notificationsEnabled =
+        await androidImpl.areNotificationsEnabled() ?? false;
+    if (!notificationsEnabled) {
+      await androidImpl.requestNotificationsPermission();
+    }
+
+    // Solicita permissão de alarme exato (necessário para Android 12+)
+    final exactAlarmPermission = await androidImpl
+        .requestExactAlarmsPermission();
+    print('Permissão de alarme exato: $exactAlarmPermission');
   }
 
   static void _onNotificationTap(NotificationResponse response) {
@@ -112,13 +116,22 @@ class NotificationService {
   static Future<void> _scheduleNotificationAfterDuration(
     Duration duration,
   ) async {
-    final scheduledTime = DateTime.now().add(duration);
+    final now = DateTime.now();
+    final scheduledTime = now.add(duration);
 
     // Verifica se o horário agendado está entre 22h e 7h
     final adjustedTime = _adjustTimeIfNeeded(scheduledTime);
 
-    // Converte para TZDateTime usando o timezone local configurado
-    final tzScheduledTime = tz.TZDateTime.from(adjustedTime, tz.local);
+    // Converte para TZDateTime mantendo o horário local
+    final tzScheduledTime = tz.TZDateTime(
+      tz.local,
+      adjustedTime.year,
+      adjustedTime.month,
+      adjustedTime.day,
+      adjustedTime.hour,
+      adjustedTime.minute,
+      adjustedTime.second,
+    );
 
     const androidDetails = AndroidNotificationDetails(
       'pain_reminder_channel',
@@ -171,30 +184,30 @@ class NotificationService {
     final hour = scheduledTime.hour;
 
     // Se está entre 22h (22) e 23h59 (23)
-    if (hour >= 23) {
-      // Agenda para 7h do dia seguinte
-      return DateTime(
+    if (hour >= 22) {
+      final adjusted = DateTime(
         scheduledTime.year,
         scheduledTime.month,
         scheduledTime.day + 1,
         7,
         0,
       );
+      return adjusted;
     }
 
     // Se está entre 0h (0) e 6h59 (6)
     if (hour < 7) {
       // Agenda para 7h do mesmo dia
-      return DateTime(
+      final adjusted = DateTime(
         scheduledTime.year,
         scheduledTime.month,
         scheduledTime.day,
         7,
         0,
       );
+      return adjusted;
     }
 
-    // Horário está ok (entre 7h e 21h59)
     return scheduledTime;
   }
 
