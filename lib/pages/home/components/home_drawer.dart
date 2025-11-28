@@ -1,6 +1,7 @@
 // pages/home/components/home_drawer.dart
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/pages/edit-profile/view/edit_profile.view.dart';
+import 'package:trabalho_cuidador/pages/pain-history/view/pain_history.view.dart';
 import 'package:trabalho_cuidador/utils/modal.dart';
 import '../../login/view/login.view.dart';
 import '../../accessibility/view/accessibility.view.dart';
@@ -64,8 +65,7 @@ class HomeDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              // Navegar para página de histórico
-              print('Histórico das dores');
+              Modal.openFullScreen(context, const PainHistoryView());
             },
           ),
           ListTile(

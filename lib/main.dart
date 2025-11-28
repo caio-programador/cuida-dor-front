@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:trabalho_cuidador/core/app_theme.dart';
 import 'package:trabalho_cuidador/pages/home/view/home.view.dart';
@@ -120,6 +121,13 @@ class _MyAppState extends State<MyApp> {
           title: 'CuidaDor',
           theme: baseTheme.copyWith(textTheme: scaledTextTheme),
           debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('pt', 'BR')],
+          locale: const Locale('pt', 'BR'),
           home: isLoggedIn == null
               ? const Scaffold(body: Center(child: CircularProgressIndicator()))
               : isLoggedIn!

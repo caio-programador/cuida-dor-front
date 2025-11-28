@@ -4,6 +4,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ApiClient {
   static final String? baseUrl = dotenv.env['API_URL'];
+  static final ApiClient _instance = ApiClient._internal();
+
+  factory ApiClient() {
+    return _instance;
+  }
+
+  ApiClient._internal();
 
   final http.Client _client = http.Client();
 
@@ -11,6 +18,13 @@ class ApiClient {
 
   void setToken(String? token) {
     _token = token;
+    print(
+      'Token configurado no ApiClient: ${token != null ? "presente" : "null"}',
+    );
+  }
+
+  String? getToken() {
+    return _token;
   }
 
   Map<String, String> get _headers {
@@ -22,23 +36,19 @@ class ApiClient {
   }
 
   Future<T> get<T>(String endpoint, T Function(dynamic) fromJson) async {
-    try {
-      final response = await _client.get(
-        Uri.parse('$baseUrl$endpoint'),
-        headers: _headers,
-      );
+    final response = await _client.get(
+      Uri.parse('$baseUrl$endpoint'),
+      headers: _headers,
+    );
 
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        return fromJson(data);
-      } else {
-        throw ApiException(
-          statusCode: response.statusCode,
-          message: response.body,
-        );
-      }
-    } catch (e) {
-      throw ApiException(message: e.toString());
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return fromJson(data);
+    } else {
+      throw ApiException(
+        statusCode: response.statusCode,
+        message: response.body,
+      );
     }
   }
 
@@ -82,7 +92,10 @@ class ApiClient {
         );
       }
     } catch (e) {
-      throw ApiException(message: e.toString());
+      throw ApiException(
+        message: e.toString(),
+        statusCode: (e as ApiException).statusCode,
+      );
     }
   }
 }
