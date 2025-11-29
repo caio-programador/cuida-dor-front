@@ -1,5 +1,6 @@
 // pages/pain-history/controller/pain_history.controller.dart
 import 'package:flutter/material.dart';
+import 'package:trabalho_cuidador/models/pain_response.dart';
 import 'package:trabalho_cuidador/providers/api_client.dart';
 import 'package:trabalho_cuidador/services/pain_service.dart';
 
@@ -37,15 +38,13 @@ class PainHistoryController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Busca o gráfico com base no período
-      _chartBase64 = await PainService.getBase64GraphImage(
-        endDate: endDate.toIso8601String().split('T').first,
-        startDate: startDate.toIso8601String().split('T').first,
+      PainResponse response = await PainService.getBase64GraphImage(
+        startDate: _startDate.toIso8601String().split('T').first,
+        endDate: _endDate.toIso8601String().split('T').first,
       );
-
-      // Simula médias - você pode ajustar para vir da API
-      _averageBefore = 5.0;
-      _averageAfter = 4.2;
+      _chartBase64 = response.image;
+      _averageBefore = response.meanBefore ?? 0.0;
+      _averageAfter = response.meanAfter ?? 0.0;
 
       _isLoading = false;
       notifyListeners();

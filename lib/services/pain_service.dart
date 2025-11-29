@@ -1,3 +1,4 @@
+import 'package:trabalho_cuidador/models/pain_response.dart';
 import 'package:trabalho_cuidador/providers/api_client.dart';
 
 class PainService {
@@ -19,7 +20,7 @@ class PainService {
     await _api.post('/pain', body, (data) => data);
   }
 
-  static Future<String> getBase64GraphImage({
+  static Future<PainResponse> getBase64GraphImage({
     int? size,
     String? startDate,
     String? endDate,
@@ -34,6 +35,9 @@ class PainService {
     if (endDate != null) {
       urlPath += '&endDate=$endDate';
     }
-    return _api.get<String>(urlPath, (data) => data['image']);
+    return _api.get<PainResponse>(
+      urlPath,
+      (data) => PainResponse.fromJson(data as Map<String, dynamic>),
+    );
   }
 }

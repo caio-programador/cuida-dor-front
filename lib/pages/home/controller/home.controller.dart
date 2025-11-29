@@ -1,5 +1,6 @@
 // pages/home/controller/home.controller.dart
 import 'package:flutter/material.dart';
+import 'package:trabalho_cuidador/models/pain_response.dart';
 import 'package:trabalho_cuidador/models/user.dart';
 import 'package:trabalho_cuidador/services/user_service.dart';
 import 'package:trabalho_cuidador/services/pain_service.dart';
@@ -35,7 +36,8 @@ class HomeController extends ChangeNotifier {
       print('Erro ao carregar dados da home: $e');
     }
     try {
-      _chartBase64 = await PainService.getBase64GraphImage(size: 5);
+      PainResponse response = await PainService.getBase64GraphImage(size: 5);
+      _chartBase64 = response.image;
       _hasPainData = true;
     } catch (e) {
       _hasPainData = false;
