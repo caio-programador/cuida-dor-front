@@ -40,7 +40,6 @@ class _RegisterViewState extends State<RegisterView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Campo de Nome
                 AnimatedBuilder(
                   animation: _controller,
                   builder: (context, _) {
@@ -52,7 +51,6 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 const SizedBox(height: 24),
 
-                // Campo de Email
                 AnimatedBuilder(
                   animation: _controller,
                   builder: (context, _) {
@@ -64,7 +62,6 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 const SizedBox(height: 24),
 
-                // Dropdown de Sexo
                 AnimatedBuilder(
                   animation: _controller,
                   builder: (context, _) {
@@ -78,7 +75,6 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 const SizedBox(height: 24),
 
-                // Campo de Senha
                 AnimatedBuilder(
                   animation: _controller,
                   builder: (context, _) {
@@ -146,7 +142,6 @@ class _RegisterViewState extends State<RegisterView> {
             const Terms(),
             const SizedBox(height: 12),
 
-            // Botão de Registrar
             AnimatedBuilder(
               animation: _controller,
               builder: (context, _) {
@@ -158,7 +153,6 @@ class _RegisterViewState extends State<RegisterView> {
             ),
             const SizedBox(height: 12),
 
-            // Link para Login
             Center(
               child: TextButton(
                 onPressed: () {

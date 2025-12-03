@@ -80,7 +80,6 @@ class RegisterPainController extends ChangeNotifier {
     return const BodyParts().withToggledId(id);
   }
 
-  // Lista de localizações para o dropdown
   final List<String> locations = [
     'Cabeça',
     'Pescoço',
@@ -106,10 +105,8 @@ class RegisterPainController extends ChangeNotifier {
   ];
 
   void selectBodyPartFromLib(BodyParts selectedParts) {
-    // Garante que apenas uma parte seja selecionada por vez
     final map = selectedParts.toMap();
 
-    // Encontra a última parte clicada (a que é diferente da atual)
     String? newlySelectedId;
     final currentMap = _selectedBodyParts.toMap();
 
@@ -120,12 +117,10 @@ class RegisterPainController extends ChangeNotifier {
       }
     }
 
-    // Se encontrou uma nova parte, seleciona apenas ela
     if (newlySelectedId != null) {
       _selectedBodyParts = const BodyParts().withToggledId(newlySelectedId);
       _selectedLocation = _bodyPartLabels[newlySelectedId];
     } else {
-      // Se clicou na mesma parte, desmarca
       _selectedBodyParts = const BodyParts();
       _selectedLocation = null;
     }
@@ -152,7 +147,6 @@ class RegisterPainController extends ChangeNotifier {
   void setPainIntensity(double value) {
     _painIntensity = value;
 
-    // Atualiza o PainLevel baseado no valor do slider
     if (value <= 1) {
       _selectedPainLevel = PainLevel.semDor;
     } else if (value <= 3) {
@@ -181,7 +175,6 @@ class RegisterPainController extends ChangeNotifier {
         type: entryPoint,
       );
 
-      // Atualiza a sessão e reagenda notificação
       await NotificationService.updateLastSession();
       await NotificationService.scheduleNextNotification();
 

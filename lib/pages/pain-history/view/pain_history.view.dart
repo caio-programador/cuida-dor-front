@@ -168,7 +168,6 @@ class _PainHistoryViewState extends State<PainHistoryView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Cards de média
                       Row(
                         children: [
                           Expanded(
@@ -190,7 +189,6 @@ class _PainHistoryViewState extends State<PainHistoryView> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Título do gráfico
                       Text(
                         'Intensidade da Dor por Dia',
                         style: Theme.of(context).textTheme.titleMedium
@@ -198,7 +196,6 @@ class _PainHistoryViewState extends State<PainHistoryView> {
                       ),
                       const SizedBox(height: 16),
 
-                      // Legenda
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -213,11 +210,9 @@ class _PainHistoryViewState extends State<PainHistoryView> {
                       ),
                       const SizedBox(height: 16),
 
-                      // Gráfico
                       _buildChart(context),
                       const SizedBox(height: 16),
 
-                      // Texto explicativo
                       Text(
                         'Compare a intensidade da dor antes e depois da terapia durante o período selecionado.',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -228,7 +223,6 @@ class _PainHistoryViewState extends State<PainHistoryView> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Seletor de data
                       Text(
                         'Período',
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(

@@ -21,7 +21,6 @@ class _AccessibilityViewState extends State<AccessibilityView> {
   @override
   void initState() {
     super.initState();
-    // Carregar valores atuais do provider
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final accessibilityProvider = context.read<AccessibilityProvider>();
       _controller.setFontSizeValue(accessibilityProvider.fontSize);
@@ -87,21 +86,18 @@ class _AccessibilityViewState extends State<AccessibilityView> {
               children: [
                 const SizedBox(height: 20),
 
-                // Slider de tamanho de fonte
                 FontSizeSlider(
                   value: _controller.fontSizeValue,
                   onChanged: _controller.setFontSizeValue,
                 ),
                 const SizedBox(height: 40),
 
-                // Switch de contraste elevado
                 ContrastSwitch(
                   value: _controller.highContrast,
                   onChanged: _controller.setHighContrast,
                 ),
                 const SizedBox(height: 60),
 
-                // Botão aplicar
                 ApplyButton(onPressed: _applySettings),
                 const SizedBox(height: 24),
               ],

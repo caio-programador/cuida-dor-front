@@ -89,23 +89,18 @@ class _RegisterPainViewState extends State<RegisterPainView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Seletor do corpo
                 BodySelector(controller: _controller),
                 const SizedBox(height: 24),
 
-                // Dropdown de localização
                 LocationDropdown(controller: _controller),
                 const SizedBox(height: 32),
 
-                // Seletor de escala de dor (emojis)
                 PainScaleSelector(controller: _controller),
                 const SizedBox(height: 32),
 
-                // Slider de intensidade
                 PainLevelSlider(controller: _controller),
                 const SizedBox(height: 40),
 
-                // Botão de registrar
                 RegisterPainButton(
                   controller: _controller,
                   onSuccess: _handleSuccess,

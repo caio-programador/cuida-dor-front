@@ -12,7 +12,6 @@ class UserService {
       (data) => data as Map<String, dynamic>,
     );
 
-    // Salva o token e configura no ApiClient
     final token = response['token'];
     await JwtToken.saveToken(token);
     _api.setToken(token);

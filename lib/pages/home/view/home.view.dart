@@ -86,7 +86,6 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Título de boas-vindas
                   RichText(
                     text: TextSpan(
                       style: Theme.of(context).textTheme.headlineMedium
@@ -104,13 +103,11 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   const SizedBox(height: 96),
 
-                  // Gráfico ou Card vazio
                   _controller.hasPainData
                       ? PainChart(base64Image: _controller.chartBase64)
                       : const EmptyPainCard(),
                   const SizedBox(height: 24),
 
-                  // Card de informações
                   GestureDetector(
                     onTap: () {
                       Modal.openFullScreen(context, const MoreInfoView());
@@ -118,8 +115,6 @@ class _HomeViewState extends State<HomeView> {
                     child: const InfoCard(),
                   ),
                   const SizedBox(height: 24),
-
-                  // Botão Registrar Dor
                 ],
               ),
             ),
@@ -145,7 +140,6 @@ class _HomeViewState extends State<HomeView> {
             ),
             const SizedBox(height: 16),
 
-            // Botão Aliviar a Dor
             ActionButton(
               text: 'Aliviar a Dor',
               isPrimary: false,

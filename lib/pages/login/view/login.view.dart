@@ -47,7 +47,6 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 const SizedBox(height: 24),
 
-                // Campo de Senha
                 AnimatedBuilder(
                   animation: _controller,
                   builder: (context, _) {
@@ -82,11 +81,9 @@ class _LoginViewState extends State<LoginView> {
             ),
             const SizedBox(height: 12),
 
-            // Link para criar conta
             Center(
               child: TextButton(
                 onPressed: () {
-                  // Navegar para página de registro
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (_) => const RegisterView()),

@@ -127,7 +127,6 @@ class EditProfileController extends ChangeNotifier {
   }
 
   String? validateNewPassword(String? value) {
-    // Senha é opcional na edição
     if (value == null || value.isEmpty) {
       return null;
     }
@@ -140,7 +139,6 @@ class EditProfileController extends ChangeNotifier {
   }
 
   String? validateConfirmPassword(String? value) {
-    // Se não digitou nova senha, não precisa confirmar
     if (newPasswordController.text.isEmpty) {
       return null;
     }
@@ -175,7 +173,6 @@ class EditProfileController extends ChangeNotifier {
         "comorbidades": comorbidades,
       };
 
-      // Apenas adiciona senha se foi digitada
       if (newPasswordController.text.isNotEmpty) {
         updateData["password"] = newPasswordController.text;
       }

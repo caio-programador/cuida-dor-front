@@ -63,7 +63,6 @@ class Modal {
           ),
         ),
         transitionsBuilder: (_, animation, __, child) {
-          // Transição de fade para suavizar a troca de modais
           return FadeTransition(opacity: animation, child: child);
         },
       ),

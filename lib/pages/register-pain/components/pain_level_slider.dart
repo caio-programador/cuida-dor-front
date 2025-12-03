@@ -11,7 +11,6 @@ class PainLevelSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Escala de referência
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
@@ -32,7 +31,6 @@ class PainLevelSlider extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        // Slider
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             activeTrackColor: Theme.of(context).colorScheme.primary,
@@ -53,7 +51,6 @@ class PainLevelSlider extends StatelessWidget {
             onChanged: (value) => controller.setPainIntensity(value),
           ),
         ),
-        // Indicadores de valor
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

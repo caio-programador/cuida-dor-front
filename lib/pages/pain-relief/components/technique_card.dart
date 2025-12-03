@@ -14,7 +14,6 @@ class TechniqueCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título da técnica
           Text(
             technique.title,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -25,7 +24,6 @@ class TechniqueCard extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          // Informações principais
           _buildInfoItem(
             context,
             'Técnica:',
@@ -48,7 +46,6 @@ class TechniqueCard extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          // Como fazer
           Text(
             'Como fazer:',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -82,7 +79,6 @@ class TechniqueCard extends StatelessWidget {
           }),
           const SizedBox(height: 24),
 
-          // Dica (se existir)
           if (technique.tip != null)
             Container(
               width: double.infinity,
@@ -127,7 +123,6 @@ class TechniqueCard extends StatelessWidget {
               ),
             ),
 
-          // Aviso (se existir)
           if (technique.warning != null) ...[
             const SizedBox(height: 16),
             Container(

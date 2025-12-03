@@ -76,7 +76,6 @@ class _MoreInfoViewState extends State<MoreInfoView> {
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
-                  // Indicadores de página
                   AnimatedBuilder(
                     animation: _controller,
                     builder: (context, _) {
@@ -89,10 +88,8 @@ class _MoreInfoViewState extends State<MoreInfoView> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Botões de navegação
                   Row(
                     children: [
-                      // Botão Voltar
                       AnimatedBuilder(
                         animation: _controller,
                         builder: (context, _) {
@@ -132,7 +129,6 @@ class _MoreInfoViewState extends State<MoreInfoView> {
                       ),
                       const SizedBox(width: 16),
 
-                      // Botão Continuar
                       AnimatedBuilder(
                         animation: _controller,
                         builder: (context, _) {

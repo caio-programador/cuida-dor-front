@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class AccessibilityController extends ChangeNotifier {
-  double _fontSizeValue = 0.5; // Valor do slider (0 a 1)
+  double _fontSizeValue = 0.5;
   bool _highContrast = false;
 
   double get fontSizeValue => _fontSizeValue;

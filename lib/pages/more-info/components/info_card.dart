@@ -17,7 +17,6 @@ class InfoCard extends StatelessWidget {
         continue;
       }
 
-      // Check if line is bold (wrapped in **)
       if (line.contains('**')) {
         final cleanText = line.replaceAll('**', '');
         widgets.add(
@@ -33,9 +32,7 @@ class InfoCard extends StatelessWidget {
             ),
           ),
         );
-      }
-      // Check if line starts with emoji or bullet point
-      else if (line.trim().startsWith('•') ||
+      } else if (line.trim().startsWith('•') ||
           line.trim().startsWith('🔴') ||
           line.trim().startsWith('🟢') ||
           RegExp(
@@ -62,9 +59,7 @@ class InfoCard extends StatelessWidget {
             ),
           ),
         );
-      }
-      // Check for warning sections
-      else if (line.contains('⚠️') || line.contains('URGENTE')) {
+      } else if (line.contains('⚠️') || line.contains('URGENTE')) {
         widgets.add(
           Container(
             margin: const EdgeInsets.symmetric(vertical: 8),
@@ -84,9 +79,7 @@ class InfoCard extends StatelessWidget {
             ),
           ),
         );
-      }
-      // Check for success/tip sections
-      else if (line.contains('💡') || line.contains('🎯')) {
+      } else if (line.contains('💡') || line.contains('🎯')) {
         widgets.add(
           Container(
             margin: const EdgeInsets.symmetric(vertical: 8),
@@ -106,9 +99,7 @@ class InfoCard extends StatelessWidget {
             ),
           ),
         );
-      }
-      // Regular text
-      else {
+      } else {
         widgets.add(
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -135,7 +126,6 @@ class InfoCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title with icon
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -172,7 +162,6 @@ class InfoCard extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          // Styled content
           ..._buildStyledContent(info.content, context),
         ],
       ),

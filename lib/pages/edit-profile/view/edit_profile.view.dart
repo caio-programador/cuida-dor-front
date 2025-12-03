@@ -97,21 +97,18 @@ class _EditProfileViewState extends State<EditProfileView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Campo de Nome
                     NameInput(
                       controller: _controller.nameController,
                       validator: _controller.validateName,
                     ),
                     const SizedBox(height: 24),
 
-                    // Campo de Email
                     EmailInput(
                       controller: _controller.emailController,
                       validator: _controller.validateEmail,
                     ),
                     const SizedBox(height: 24),
 
-                    // Dropdown de Sexo
                     GenderDropdown(
                       value: _controller.selectedGender,
                       options: _controller.genderOptions,
@@ -120,7 +117,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                     ),
                     const SizedBox(height: 24),
 
-                    // Campo de Nova Senha
                     PasswordInput(
                       controller: _controller.newPasswordController,
                       validator: _controller.validateNewPassword,
@@ -131,7 +127,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                     ),
                     const SizedBox(height: 24),
 
-                    // Confirmar Nova Senha
                     PasswordInput(
                       controller: _controller.confirmPasswordController,
                       validator: _controller.validateConfirmPassword,
@@ -142,7 +137,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                     ),
                     const SizedBox(height: 24),
 
-                    // Comorbidades
                     Text(
                       'Comorbidades:',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(

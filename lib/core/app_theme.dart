@@ -10,7 +10,6 @@ class AppTheme {
   static const Color redDanger = Color.fromARGB(255, 255, 56, 60);
   static const Color backgroundLight = Color.fromARGB(255, 238, 238, 238);
 
-  // Cores de alto contraste
   static const Color highContrastPrimary = Color.fromARGB(255, 0, 0, 0);
   static const Color highContrastText = Color.fromARGB(255, 0, 0, 0);
   static const Color highContrastBackground = Color.fromARGB(

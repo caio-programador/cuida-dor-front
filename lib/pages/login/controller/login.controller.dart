@@ -1,6 +1,7 @@
 // pages/login/controller/login.controller.dart
 import 'package:flutter/material.dart';
 import 'package:trabalho_cuidador/pages/home/view/home.view.dart';
+import 'package:trabalho_cuidador/providers/api_client.dart';
 import 'package:trabalho_cuidador/services/auth_service.dart';
 
 class LoginController extends ChangeNotifier {
@@ -64,9 +65,11 @@ class LoginController extends ChangeNotifier {
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(
-        formKey.currentContext!,
-      ).showSnackBar(SnackBar(content: Text('Erro ao fazer login: $e')));
+      ScaffoldMessenger.of(formKey.currentContext!).showSnackBar(
+        SnackBar(
+          content: Text('Erro ao fazer login: ${(e as ApiException).message}'),
+        ),
+      );
     } finally {
       _isLoading = false;
       notifyListeners();

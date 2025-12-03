@@ -47,7 +47,7 @@ class ApiClient {
     } else {
       throw ApiException(
         statusCode: response.statusCode,
-        message: response.body,
+        message: json.decode(response.body)['error'],
       );
     }
   }
@@ -57,44 +57,33 @@ class ApiClient {
     Map<String, dynamic> body,
     T Function(dynamic) fromJson,
   ) async {
-    try {
-      final response = await _client.post(
-        Uri.parse('$baseUrl$endpoint'),
-        headers: _headers,
-        body: json.encode(body),
-      );
+    final response = await _client.post(
+      Uri.parse('$baseUrl$endpoint'),
+      headers: _headers,
+      body: json.encode(body),
+    );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = json.decode(response.body);
-        return fromJson(data);
-      } else {
-        throw ApiException(
-          statusCode: response.statusCode,
-          message: response.body,
-        );
-      }
-    } catch (e) {
-      throw ApiException(message: e.toString());
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = json.decode(response.body);
+      return fromJson(data);
+    } else {
+      throw ApiException(
+        statusCode: response.statusCode,
+        message: json.decode(response.body)['error'],
+      );
     }
   }
 
   Future<void> patch(String endpoint, Map<String, dynamic> body) async {
-    try {
-      final response = await _client.patch(
-        Uri.parse('$baseUrl$endpoint'),
-        headers: _headers,
-        body: json.encode(body),
-      );
-      if (response.statusCode != 200 && response.statusCode != 204) {
-        throw ApiException(
-          statusCode: response.statusCode,
-          message: response.body,
-        );
-      }
-    } catch (e) {
+    final response = await _client.patch(
+      Uri.parse('$baseUrl$endpoint'),
+      headers: _headers,
+      body: json.encode(body),
+    );
+    if (response.statusCode != 200 && response.statusCode != 204) {
       throw ApiException(
-        message: e.toString(),
-        statusCode: (e as ApiException).statusCode,
+        statusCode: response.statusCode,
+        message: json.decode(response.body)['error'],
       );
     }
   }

@@ -25,7 +25,6 @@ class PainChart extends StatelessWidget {
 
   Widget _buildBase64Image() {
     try {
-      // Remove o prefixo "data:image/...;base64," se existir
       String cleanBase64 = base64Image!;
       if (cleanBase64.contains(',')) {
         cleanBase64 = cleanBase64.split(',').last;
@@ -48,7 +47,6 @@ class PainChart extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 20),
-        // Simulação de gráfico de barras
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -60,7 +58,6 @@ class PainChart extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        // Legenda
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -48,7 +48,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 1
             _buildSectionTitle('1. Aceitação dos Termos'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -56,7 +55,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 2
             _buildSectionTitle('2. Uso do Aplicativo'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -64,7 +62,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 3
             _buildSectionTitle('3. Cadastro e Responsabilidade do Usuário'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -72,7 +69,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 4
             _buildSectionTitle('4. Privacidade'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -80,7 +76,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 5
             _buildSectionTitle('5. Propriedade Intelectual'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -88,7 +83,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 6
             _buildSectionTitle('6. Limitação de Responsabilidade'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -96,7 +90,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 7
             _buildSectionTitle('7. Modificações nos Termos'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -104,7 +97,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 8
             _buildSectionTitle('8. Rescisão'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -112,7 +104,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Seção 9
             _buildSectionTitle('9. Contato'),
             const SizedBox(height: 12),
             _buildSectionContent(
@@ -120,7 +111,6 @@ class TermsView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Data de atualização
             Center(
               child: Text(
                 'Última atualização: Novembro de 2025',

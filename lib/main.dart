@@ -47,12 +47,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Consumer<AccessibilityProvider>(
       builder: (context, accessibility, _) {
-        // Seleciona tema base (normal ou alto contraste)
         final baseTheme = accessibility.highContrast
             ? AppTheme.highContrastTheme
             : AppTheme.lightTheme;
 
-        // Cria textTheme com font sizes garantidos
         final baseTextTheme = baseTheme.textTheme;
         final scaledTextTheme = TextTheme(
           displayLarge: _scaleTextStyle(

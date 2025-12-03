@@ -7,7 +7,6 @@ import 'package:trabalho_cuidador/services/pain_service.dart';
 import 'package:trabalho_cuidador/services/notification_service.dart';
 
 class HomeController extends ChangeNotifier {
-  // Simulação: true = tem dados, false = não tem dados
   bool _hasPainData = false;
   String _userName = 'Usuário';
   String? _chartBase64;
@@ -18,14 +17,11 @@ class HomeController extends ChangeNotifier {
   String? get chartBase64 => _chartBase64;
   bool get isLoading => _isLoading;
 
-  // Simula o carregamento dos dados do usuário
   Future<void> loadUserData() async {
     _isLoading = true;
     notifyListeners();
 
-    // Atualiza a última sessão do usuário
     await NotificationService.updateLastSession();
-    // Agenda próxima notificação
     await NotificationService.scheduleNextNotification();
 
     try {
