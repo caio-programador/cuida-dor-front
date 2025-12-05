@@ -12,11 +12,6 @@ class PainChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(12),
-      ),
       child: base64Image != null && base64Image!.isNotEmpty
           ? _buildBase64Image()
           : _buildPlaceholderChart(),
@@ -31,12 +26,16 @@ class PainChart extends StatelessWidget {
       }
 
       final bytes = base64Decode(cleanBase64);
-      return Image.memory(
-        bytes,
-        fit: BoxFit.contain,
-        errorBuilder: (context, error, stackTrace) {
-          return _buildPlaceholderChart();
-        },
+      return InteractiveViewer(
+        minScale: 0.5,
+        maxScale: 4.0,
+        child: Image.memory(
+          bytes,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            return _buildPlaceholderChart();
+          },
+        ),
       );
     } catch (e) {
       return _buildPlaceholderChart();

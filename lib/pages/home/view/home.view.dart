@@ -37,120 +37,126 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppTheme.background,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0,
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: Icon(Icons.menu, color: Theme.of(context).iconTheme.color),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, _) {
+        return Scaffold(
+          backgroundColor: AppTheme.background,
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 0,
+            leading: Builder(
+              builder: (context) {
+                return IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                );
               },
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.person_outline,
-              color: Theme.of(context).iconTheme.color,
             ),
-            onPressed: () async {
-              await Modal.openFullScreen(context, const EditProfileView());
-              _controller.loadUserData();
-            },
-          ),
-        ],
-      ),
-      drawer: const HomeDrawer(),
-      body: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, _) {
-          if (_controller.isLoading) {
-            return Center(
-              child: CircularProgressIndicator(
-                color: Theme.of(context).colorScheme.primary,
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.person_outline,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                onPressed: () async {
+                  await Modal.openFullScreen(context, const EditProfileView());
+                  _controller.loadUserData();
+                },
               ),
-            );
-          }
-
-          return RefreshIndicator(
-            onRefresh: () => _controller.loadUserData(),
-            color: Theme.of(context).colorScheme.primary,
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: Theme.of(context).textTheme.headlineMedium
-                          ?.copyWith(fontSize: 28, fontWeight: FontWeight.bold),
+            ],
+          ),
+          drawer: HomeDrawer(user: _controller.user, controller: _controller),
+          body: _controller.isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                )
+              : RefreshIndicator(
+                  onRefresh: () => _controller.loadUserData(),
+                  color: Theme.of(context).colorScheme.primary,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextSpan(text: 'Bem vindo ${_controller.userName} ao '),
-                        TextSpan(
-                          text: 'CuidaDor',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
+                        RichText(
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.headlineMedium
+                                ?.copyWith(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            children: [
+                              TextSpan(
+                                text: 'Bem vindo ${_controller.userName} ao ',
+                              ),
+                              TextSpan(
+                                text: 'CuidaDor',
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
+                        const SizedBox(height: 96),
+
+                        _controller.hasPainData
+                            ? PainChart(base64Image: _controller.chartBase64)
+                            : const EmptyPainCard(),
+                        const SizedBox(height: 24),
+
+                        GestureDetector(
+                          onTap: () {
+                            Modal.openFullScreen(context, const MoreInfoView());
+                          },
+                          child: const InfoCard(),
+                        ),
+                        const SizedBox(height: 24),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 96),
+                ),
+          bottomNavigationBar: SafeArea(
+            minimum: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ActionButton(
+                  text: 'Registrar Dor',
+                  onPressed: () async {
+                    await Modal.openFullScreen(
+                      context,
+                      const RegisterPainView(
+                        entryPoint: 'BEFORE_RELIEF_TECHNIQUES',
+                      ),
+                    );
+                    _controller.loadUserData();
+                  },
+                ),
+                const SizedBox(height: 16),
 
-                  _controller.hasPainData
-                      ? PainChart(base64Image: _controller.chartBase64)
-                      : const EmptyPainCard(),
-                  const SizedBox(height: 24),
-
-                  GestureDetector(
-                    onTap: () {
-                      Modal.openFullScreen(context, const MoreInfoView());
-                    },
-                    child: const InfoCard(),
-                  ),
-                  const SizedBox(height: 24),
-                ],
-              ),
+                ActionButton(
+                  text: 'Aliviar a Dor',
+                  isPrimary: false,
+                  onPressed: () {
+                    Modal.openFullScreen(context, const PainReliefView());
+                  },
+                ),
+                const SizedBox(height: 24),
+              ],
             ),
-          );
-        },
-      ),
-      bottomNavigationBar: SafeArea(
-        minimum: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ActionButton(
-              text: 'Registrar Dor',
-              onPressed: () async {
-                await Modal.openFullScreen(
-                  context,
-                  const RegisterPainView(
-                    entryPoint: 'BEFORE_RELIEF_TECHNIQUES',
-                  ),
-                );
-                _controller.loadUserData();
-              },
-            ),
-            const SizedBox(height: 16),
-
-            ActionButton(
-              text: 'Aliviar a Dor',
-              isPrimary: false,
-              onPressed: () {
-                Modal.openFullScreen(context, const PainReliefView());
-              },
-            ),
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

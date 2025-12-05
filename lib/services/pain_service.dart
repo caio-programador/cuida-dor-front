@@ -16,7 +16,6 @@ class PainService {
       "type": type,
       "dateTimeEvent": dateTimeEvent,
     };
-    print(body);
     await _api.post('/pain', body, (data) => data);
   }
 

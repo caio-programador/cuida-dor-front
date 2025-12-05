@@ -38,7 +38,6 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> checkLogin() async {
     await dotenv.load(fileName: ".env");
-    await Future.delayed(const Duration(seconds: 2));
     final logged = await AuthService.isUserLoggedIn();
     setState(() => isLoggedIn = logged);
   }

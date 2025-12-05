@@ -14,8 +14,16 @@ class User {
   final String? email;
   final SexUser? sex;
   final String? comorbidities;
+  final String? role;
 
-  User({this.id, this.name, this.email, this.sex, this.comorbidities});
+  User({
+    this.id,
+    this.name,
+    this.email,
+    this.sex,
+    this.comorbidities,
+    this.role,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -24,6 +32,7 @@ class User {
       email: json['email'],
       sex: SexUser.values.firstWhere((e) => e.value == json['sex']),
       comorbidities: json['comorbidades'],
+      role: json['role'],
     );
   }
 }

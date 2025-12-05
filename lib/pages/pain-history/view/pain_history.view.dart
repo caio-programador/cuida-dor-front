@@ -312,13 +312,9 @@ class _PainHistoryViewState extends State<PainHistoryView> {
         }
 
         final bytes = base64Decode(cleanBase64);
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.circular(12),
-          ),
+        return InteractiveViewer(
+          minScale: 0.5,
+          maxScale: 4.0,
           child: Image.memory(
             bytes,
             fit: BoxFit.contain,
